@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Lista de Tarefas</h1>
+    <div class="form-container">
+        <form class="add-form" action="{{ url_for('tasks_bp.add') }}" method="post">
+            <label for="task">Nova Tarefa:</label>
+            <input class="add-input" type="text" id="task" name="task" required>
+            <button class="btn btn-purple add-btn" type="submit">Adicionar Tarefa</button>
+        </form>
+    </div>
+    <div class="container">
+        <h1>Tarefas</h1>
+        <ul class="task-list">
+            {% for task in tasks %}
+                <li class="task-item">
+                    <span class="task-text">{{ task }}</span>
+                    <a class="delete-btn" href="{{ url_for('tasks_bp.delete', task_id=loop.index-1) }}">Excluir</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
